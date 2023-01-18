@@ -1,0 +1,16 @@
+<!DOCTYPE html> <!-- Используется html 5 версии -->
+<html lang="ru"> <!-- Язык сайта - русский -->
+  <head>
+{% load user_filters %}
+    {% block title %}
+    
+    {% endblock title %}
+  </head>
+  <body>
+        <a href="{% url 'posts:index' %}">Главная</a>
+        <br>
+      {% block content%}
+
+      {% endblock content%}
+  </body>
+</html>
