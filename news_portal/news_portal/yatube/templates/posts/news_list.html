@@ -1,0 +1,25 @@
+{% extends "default.html" %}
+{% load user_filters %}
+{% block title %}
+  <title>Новости</title>
+{% endblock title %}
+{% block content %}
+    {% for post in posts %}
+      <article>
+      <ul>
+        <li>
+          Заголовок: {{ post.title|censor }}
+        </li>
+        <li>
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        </li>
+      </ul>
+      <p>
+        {{ post.text|truncatechars:21|censor}}
+      </p>
+      <a href={% url 'posts:news_detail' post.pk %}>Посмотреть</a>
+      {% if not forloop.last %}<hr>{% endif %}
+      </article>
+    {% endfor %}
+  </div>
+{% endblock content%}
