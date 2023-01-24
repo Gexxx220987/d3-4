@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect
 from .models import Post
 from .filters import PostFilter
 from .forms import PostForm
@@ -11,6 +12,10 @@ class PostsList(ListView):
     ordering = 'date_time'
     template_name = 'posts.html'
     context_object_name = 'posts'
+
+
+def news_redirect(request):
+    return redirect('news/')
 
 
 class SearchPosts(ListView):

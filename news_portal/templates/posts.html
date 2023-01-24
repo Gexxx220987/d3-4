@@ -31,8 +31,8 @@ Posts
             <td>{{ post.date_time }}</td>
             <td>{{ post.text | truncatewords:20 | censor}}</td>
             <td><a class="btn btn-primary btn-sm" href="/news/{{ post.pk }}">Читать</a></td>
-            <td><a class="btn btn-primary btn-sm" href="/news/news/{{ post.pk }}/edit/">Редактировать</a></td>
-            <td><a class="btn btn-primary btn-sm" href="/news/news/{{ post.pk }}/delete/">Удалить</a></td>
+            <td><a class="btn btn-primary btn-sm" href="/news/{{ post.pk }}/edit/">Редактировать</a></td>
+            <td><a class="btn btn-primary btn-sm" href="/news/{{ post.pk }}/delete/">Удалить</a></td>
         </tr>
         {% endfor %}
         </tbody>

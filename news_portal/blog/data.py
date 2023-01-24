@@ -14,13 +14,14 @@ users = [
     "Герман"
 ]
 
-authors = users[:2]
+authors = users[1]
 
 categories = [
     "Юмор",
     "Новости",
     "IT",
-    "Сплетни"
+    "Сплетни",
+    'fefe'
 ]
 
 article_text = """ 

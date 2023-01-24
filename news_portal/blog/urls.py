@@ -3,10 +3,12 @@ from django.urls import path
 from .views import PostsList, PostDetail, SearchPosts
 from .views import ArticleCreate, ArticleUpdate, ArticleDelete
 from .views import NewsCreate, NewsUpdate, NewsDelete
+from .views import news_redirect
 
 urlpatterns = [
-    path('', PostsList.as_view(), name='posts_list'),
-    path('<int:pk>/', PostDetail.as_view(), name='post_detail'),
+    path('', news_redirect),
+    path('news/', PostsList.as_view(), name='posts_list'),
+    path('news/<int:pk>/', PostDetail.as_view(), name='post_detail'),
     path('search/', SearchPosts.as_view(), name='search_posts'),
     path('news/create/', NewsCreate.as_view(), name='news_create'),
     path('news/<int:pk>/edit/', NewsUpdate.as_view(), name='news_update'),
