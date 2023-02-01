@@ -1,8 +1,23 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Post
 
+from allauth.account.forms import SignupForm
+from django.contrib.auth.models import Group
+
+
+class CustomSignupForm(SignupForm):
+    def save(self, request):
+        user = super().save(request)
+        common_users = Group.objects.get(name="author")
+        user.groups.add(common_users)
+        return user
+
+
+User = get_user_model()
 
 class PostForm(forms.ModelForm):
     required_css_class = 'my-custom-class'
@@ -31,3 +46,9 @@ class PostForm(forms.ModelForm):
                 "Текст статьи не должен быть идентичен заголовку."
             )
         return cleaned_data
+
+
+# class Registration(UserCreationForm):
+#     class Meta(UserCreationForm):
+#         model = User
+#         fields = ('first_name', 'last_name', 'username', 'email')

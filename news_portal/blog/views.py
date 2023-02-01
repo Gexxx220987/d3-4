@@ -1,11 +1,18 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
 from .models import Post
 from .filters import PostFilter
-from .forms import PostForm
+from .forms import PostForm, Registration
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+
+
+
+#@method_decorator(login_required, name='')
 class PostsList(ListView):
     paginate_by = 3
     model = Post
@@ -42,7 +49,8 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class ArticleCreate(CreateView):
+class ArticleCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
@@ -53,7 +61,8 @@ class ArticleCreate(CreateView):
         return context
 
 
-class ArticleUpdate(UpdateView):
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
@@ -64,7 +73,8 @@ class ArticleUpdate(UpdateView):
         return context
 
 
-class ArticleDelete(DeleteView):
+class ArticleDelete(LoginRequiredMixin, DeleteView):
+    raise_exception = True
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
@@ -76,7 +86,8 @@ class ArticleDelete(DeleteView):
         return context
 
 
-class NewsCreate(CreateView):
+class NewsCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
@@ -87,7 +98,8 @@ class NewsCreate(CreateView):
         return context
 
 
-class NewsUpdate(UpdateView):
+class NewsUpdate(LoginRequiredMixin, UpdateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
@@ -98,7 +110,8 @@ class NewsUpdate(UpdateView):
         return context
 
 
-class NewsDelete(DeleteView):
+class NewsDelete(LoginRequiredMixin, DeleteView):
+    raise_exception = True
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
@@ -108,3 +121,9 @@ class NewsDelete(DeleteView):
         context['page_title'] = "Удалить новость"
         context['previous_page_url'] = reverse_lazy('posts_list')
         return context
+
+
+class SignUp(CreateView):
+    form_class = Registration
+    success_url = reverse_lazy('blog:posts_list')
+    template_name = 'signup.html'
