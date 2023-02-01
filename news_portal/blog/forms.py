@@ -48,7 +48,7 @@ class PostForm(forms.ModelForm):
         return cleaned_data
 
 
-# class Registration(UserCreationForm):
-#     class Meta(UserCreationForm):
-#         model = User
-#         fields = ('first_name', 'last_name', 'username', 'email')
+class Registration(UserCreationForm):
+    class Meta(UserCreationForm):
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email')
